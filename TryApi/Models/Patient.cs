@@ -7,7 +7,7 @@ using System.Web;
 
 namespace TryApi.Models
 {
-    public class PatientData
+    public class Patient
     {
         [BsonElement("-id")]
         [BsonRepresentation(BsonType.ObjectId)]

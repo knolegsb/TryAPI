@@ -8,12 +8,12 @@ namespace TryApi.Models
 {
     public static class PatientDb
     {
-        public static MongoCollection<PatientData> Open()
+        public static MongoCollection<Patient> Open()
         {
             var client = new MongoClient("mongodb://localhost");
             var server = client.GetServer();
             var db = server.GetDatabase("PatientDb");
-            return db.GetCollection<PatientData>("Patients");
+            return db.GetCollection<Patient>("Patients");
         }
     }
 }
