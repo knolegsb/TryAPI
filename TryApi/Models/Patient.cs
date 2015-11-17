@@ -9,12 +9,12 @@ namespace TryApi.Models
 {
     public class Patient
     {
-        [BsonElement("-id")]
+        [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Ailment> Ailment { get; set; }
-        public ICollection<Medication> Medication { get; set; }
+        public ICollection<Ailment> Ailments { get; set; }
+        public ICollection<Medication> Medications { get; set; }
     }
 
     public class Medication
