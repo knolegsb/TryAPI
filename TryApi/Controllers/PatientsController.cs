@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,16 @@ namespace TryApi.Controllers
         public IEnumerable<Patient> Get()
         {
             return _patients.FindAll();
+        }
+        
+        public IHttpActionResult Get(string id)
+        {
+            var patient = _patients.FindOneById(ObjectId.Parse(id));
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return Ok(patient);
         }
     }
 }
