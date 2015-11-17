@@ -24,14 +24,24 @@ namespace TryApi.Controllers
             return _patients.FindAll();
         }
         
-        public IHttpActionResult Get(string id)
+        public HttpResponseMessage Get(string id)
         {
             var patient = _patients.FindOneById(ObjectId.Parse(id));
             if (patient == null)
             {
-                return NotFound();
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient not found!");
             }
-            return Ok(patient);
+            return Request.CreateResponse(patient);
         }
+
+        //public IHttpActionResult Get(string id)
+        //{
+        //    var patient = _patients.FindOneById(ObjectId.Parse(id));
+        //    if (patient == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(patient);
+        //}
     }
 }
