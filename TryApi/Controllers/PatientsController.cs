@@ -43,5 +43,16 @@ namespace TryApi.Controllers
         //    }
         //    return Ok(patient);
         //}
+
+            [Route("api/patients/{id}/medications")]
+        public HttpResponseMessage GetMedications(string id)
+        {
+            var patient = _patients.FindOneById(ObjectId.Parse(id));
+            if (patient == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient not found!");
+            }
+            return Request.CreateResponse(patient.Medications);
+        }
     }
 }
