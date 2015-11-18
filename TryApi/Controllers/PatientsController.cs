@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using TryApi.Models;
 
 namespace TryApi.Controllers
 {
+    [EnableCors("*", "*", "GET")]
     public class PatientsController : ApiController
     {
         MongoCollection<Patient> _patients;
