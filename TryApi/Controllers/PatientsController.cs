@@ -12,6 +12,7 @@ using TryApi.Models;
 namespace TryApi.Controllers
 {
     [EnableCors("*", "*", "GET")]
+    [Authorize]
     public class PatientsController : ApiController
     {
         MongoCollection<Patient> _patients;
