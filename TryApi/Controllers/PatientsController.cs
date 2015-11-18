@@ -23,36 +23,47 @@ namespace TryApi.Controllers
         {
             return _patients.FindAll();
         }
-        
-        public HttpResponseMessage Get(string id)
-        {
-            var patient = _patients.FindOneById(ObjectId.Parse(id));
-            if (patient == null)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient not found!");
-            }
-            return Request.CreateResponse(patient);
-        }
 
-        //public IHttpActionResult Get(string id)
+        //public HttpResponseMessage Get(string id)
         //{
         //    var patient = _patients.FindOneById(ObjectId.Parse(id));
         //    if (patient == null)
         //    {
-        //        return NotFound();
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient not found!");
         //    }
-        //    return Ok(patient);
+        //    return Request.CreateResponse(patient);
         //}
 
-            [Route("api/patients/{id}/medications")]
-        public HttpResponseMessage GetMedications(string id)
+        public IHttpActionResult Get(string id)
         {
             var patient = _patients.FindOneById(ObjectId.Parse(id));
             if (patient == null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient not found!");
+                return NotFound();
             }
-            return Request.CreateResponse(patient.Medications);
+            return Ok(patient);
+        }
+
+        //[Route("api/patients/{id}/medications")]
+        //public HttpResponseMessage GetMedications(string id)
+        //{
+        //    var patient = _patients.FindOneById(ObjectId.Parse(id));
+        //    if (patient == null)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient not found!");
+        //    }
+        //    return Request.CreateResponse(patient.Medications);
+        //}
+
+        [Route("api/patients/{id}/medications")]
+        public IHttpActionResult GetMedications(string id)
+        {
+            var patient = _patients.FindOneById(ObjectId.Parse(id));
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return Ok(patient.Medications);
         }
     }
 }
